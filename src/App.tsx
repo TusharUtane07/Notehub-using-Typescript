@@ -1,10 +1,11 @@
+import Error from "./Pages/Error"
 import SignIn from "./Pages/SignIn"
 import SignUp from "./Pages/SignUp"
 
 const App = () => {
   return (
     <div>
-      <SignIn/>
+      <Error/>
     </div>
   )
 }

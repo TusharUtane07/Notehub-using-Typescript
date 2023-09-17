@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import logo from '../Assests/logo.png';
 
 const SignIn = () => {
@@ -17,7 +17,7 @@ const SignIn = () => {
         </div>
         <div className='flex flex-col text-center mt-[9px] text-[#768492] '>
           <h2 className='text-[27px]  text-black'>Sign In</h2>
-          <p className='text-[16px] text-[#768492] mt-5 '>Create your account.</p>
+          <p className='text-[16px] text-[#768492] mt-5 '>Login to stay connected.</p>
           <form className='flex flex-col mt-5' >
             <input type="email" placeholder='Email' className='bg-[#f3f6fd] mx-[12px] ml-[18px] my-[6px] rounded-xl pl-[8px] outline-none border border-[#dcdddf] h-[45px] w-[471px]' />
 
