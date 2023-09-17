@@ -4,3 +4,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inclusive+Sans&family=Poppins&display=swap');
 
+body{
+    background-color: #f3f6fd;
+}
+.buttonStyle{
+    background-color: #0f0e17;
+    color: white;
+    height: 40px;
+    border-radius: 8px;
+}
