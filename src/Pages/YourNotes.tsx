@@ -1,9 +1,5 @@
-import React from 'react'
-
 const YourNotes = () => {
-  return (
-    <div>YourNotes</div>
-  )
-}
+	return <div>YourNotes</div>;
+};
 
-export default YourNotes
+export default YourNotes;

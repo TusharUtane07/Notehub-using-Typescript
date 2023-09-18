@@ -1,7 +1,6 @@
 import { GrPowerReset } from "react-icons/gr";
 import { MdSaveAlt } from "react-icons/md";
 import { FaBackward } from "react-icons/fa";
-import Footer from "./Footer";
 import Sidebar from "./Sidebar";
 import { NavLink } from "react-router-dom";
 import { MouseEvent, useState } from "react";
@@ -68,7 +67,6 @@ const NoteGround = () => {
 					</form>
 				</div>
 			</div>
-			<Footer />
 		</>
 	);
 };

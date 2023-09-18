@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { BiAddToQueue } from "react-icons/bi";
 import { MdOutlineDeleteOutline } from "react-icons/md";
-import Footer from "./Footer";
 import Sidebar from "./Sidebar";
+import { NavLink } from "react-router-dom";
+import { FaBackward } from "react-icons/fa";
 
 const TodoGround = () => {
 	const [todo, setTodo] = useState<string>("");
@@ -70,8 +71,14 @@ const TodoGround = () => {
 		<>
 			<Sidebar />
 			<div>
-				<div className="h-[78px] bg-white w-[1150px] shadow-md mt-[30px] rounded-xl text-3xl px-10 py-5 font-Jost font-bold">
-					To-do List
+				<div className="h-[78px] bg-white w-[1150px] shadow-md mt-[30px] rounded-xl text-3xl px-10 py-5 font-Jost font-bold flex justify-between">
+					<p>To-Do List</p>
+					<NavLink to={"/"}>
+						<div className="flex items-center text-lg buttonStyle px-5 gap-3">
+							<FaBackward />
+							<button>Back</button>
+						</div>
+					</NavLink>
 				</div>
 
 				<div className="bg-white rounded-xl mt-6 shadow-md w-[1150px] pb-10">
@@ -137,7 +144,6 @@ const TodoGround = () => {
 					</div>
 				</div>
 			</div>
-			<Footer />
 		</>
 	);
 };

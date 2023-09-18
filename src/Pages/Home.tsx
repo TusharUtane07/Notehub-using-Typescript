@@ -1,5 +1,5 @@
+import { NavLink } from "react-router-dom";
 import vector from "../Assests/vector.png";
-import Footer from "../Components/Footer";
 import Sidebar from "../Components/Sidebar";
 
 const Home = () => {
@@ -21,16 +21,17 @@ const Home = () => {
 						<p className="mt-5 text-4xl">
 							Create awesome notes, To-do Lists and much more.
 						</p>
-						<button className="font-Jost bg-[#0f0e17] text-white rounded-md py-3 text-2xl px-5 mt-8 ">
-							Create Your First Note
-						</button>
+						<NavLink to={"/create-note"}>
+							<button className="font-Jost bg-[#0f0e17] text-white rounded-md py-3 text-2xl px-5 mt-8 ">
+								Create Your First Note
+							</button>
+						</NavLink>
 					</div>
 					<div>
 						<img src={vector} alt="" className="w-[700px]" />
 					</div>
 				</div>
 			</div>
-			<Footer />
 		</>
 	);
 };

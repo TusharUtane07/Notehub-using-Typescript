@@ -15,10 +15,12 @@ const Sidebar = () => {
 	return (
 		<div>
 			<div className=" my-[30px] mx-[30px] shadow-xl rounded-xl bg-[#ffffff] w-[270px] pl-5 pr-5">
-				<div className="flex items-center gap-6 font-bold py-5">
-					<img src={logo} alt="" className="w-[60px] h-[60px]" />
-					<p className="font-Jost text-[23px]">NoteHub</p>
-				</div>
+				<NavLink to={"/"}>
+					<div className="flex items-center gap-6 font-bold py-5">
+						<img src={logo} alt="" className="w-[60px] h-[60px]" />
+						<p className="font-Jost text-[23px]">NoteHub</p>
+					</div>
+				</NavLink>
 				<div className="w-full h-[1px] bg-[#768492]"></div>
 				<div className="flex gap-3 items-center">
 					<img
@@ -65,21 +67,24 @@ const Sidebar = () => {
 					<div></div>
 				)}
 
-				<div className="mt-4 flex items-center gap-4 bg-[#f3f6fd] py-3 rounded-lg px-4">
+				<div className="mt-4 cursor-pointer flex items-center gap-4 bg-[#f3f6fd] py-3 rounded-lg px-4">
 					<PiNotebookBold />
 					<p>Your Notes</p>
 				</div>
-
-				<div className="mt-4 flex items-center gap-4 bg-[#f3f6fd] py-3 rounded-lg px-4">
-					<LuListTodo />
-					<p>To-do List</p>
-				</div>
+				<NavLink to={"/todolist"}>
+					<div className="mt-4 cursor-pointer flex items-center gap-4 bg-[#f3f6fd] py-3 rounded-lg px-4">
+						<LuListTodo />
+						<p>To-do List</p>
+					</div>
+				</NavLink>
 				<div className="mt-5 text-center">
 					<img src={upgrade} alt="" />
 					<p className="capitalize">
 						Set Business Account To Explore premium features
 					</p>
-					<button className="mt-3 mb-5 buttonStyle px-5">Upgrade</button>
+					<NavLink to={"/pricing"}>
+						<button className="mt-3 mb-5 buttonStyle px-5">Upgrade</button>
+					</NavLink>
 					<button className="mt-3 mb-5 ml-3 buttonStyle px-5">Logout</button>
 				</div>
 			</div>

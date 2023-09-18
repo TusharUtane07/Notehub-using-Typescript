@@ -1,13 +1,20 @@
-import Footer from "../Components/Footer";
+import { NavLink } from "react-router-dom";
 import Sidebar from "../Components/Sidebar";
+import { FaBackward } from "react-icons/fa";
 
 const Pricing = () => {
 	return (
 		<>
 			<Sidebar />
 			<div>
-				<div className="h-[78px] bg-white w-[1150px] shadow-md mt-[30px] rounded-xl text-3xl px-10 py-5 font-Jost font-bold">
-					Pricing
+				<div className="h-[78px] bg-white w-[1150px] shadow-md mt-[30px] rounded-xl text-3xl px-10 py-5 font-Jost font-bold flex justify-between">
+					<p>Pricing</p>
+					<NavLink to={"/"}>
+						<div className="flex items-center text-lg buttonStyle px-5 gap-3">
+							<FaBackward />
+							<button>Back</button>
+						</div>
+					</NavLink>
 				</div>
 
 				<div className="bg-white rounded-xl mt-6 shadow-md w-[1150px] ">
@@ -56,7 +63,6 @@ const Pricing = () => {
 					</div>
 				</div>
 			</div>
-			<Footer />
 		</>
 	);
 };
