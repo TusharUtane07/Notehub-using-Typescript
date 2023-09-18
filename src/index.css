@@ -13,3 +13,6 @@ body{
     height: 40px;
     border-radius: 8px;
 }
+::-webkit-scrollbar{
+    display: none;
+}
