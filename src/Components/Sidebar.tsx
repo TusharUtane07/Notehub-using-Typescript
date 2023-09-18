@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 import logo from "../Assests/logo.png";
 import avatar from "../Assests/Avatar.jpg";
-import { BiSearch } from "react-icons/bi";
+// import { BiSearch } from "react-icons/bi";
 import { AiOutlinePlus, AiOutlineDown } from "react-icons/ai";
 import { PiNotebookBold } from "react-icons/pi";
 import { LuListTodo } from "react-icons/lu";
@@ -29,14 +30,14 @@ const Sidebar = () => {
 						Tushar Rambhau Utane
 					</p>
 				</div>
-				<div className="mt-3 bg-[#f3f6fd] flex gap-3 items-center h-[40px] pl-3 rounded-lg">
+				{/* <div className="mt-3 bg-[#f3f6fd] flex gap-3 items-center h-[40px] pl-3 rounded-lg">
 					<BiSearch />
 					<input
 						type="text"
 						placeholder="search"
 						className="bg-transparent outline-none  w-[150px]  text-lg pl-2"
 					/>
-				</div>
+				//! </div> WORK ON THESE AFTER COMPLETING THE PROJECT */}
 				<div
 					className="flex cursor-pointer items-center  mt-4 buttonStyle pl-5 gap-3"
 					onClick={() => setPopUp(!popUp)}>
@@ -47,14 +48,18 @@ const Sidebar = () => {
 
 				{popUp ? (
 					<div className="bg-[#f3f6fd] shadow-xl mt-3 rounded-xl h-32 w-56 px-3 py-2 text-center cursor-pointer">
-						<div className="flex items-center gap-3 ml-4 text-xl my-5">
-							<PiNotebookBold />
-							<p>Blank Note</p>
-						</div>
-						<div className="flex items-center gap-3 ml-4 text-xl my-5">
-							<LuListTodo />
-							<p>To-do List</p>
-						</div>
+						<NavLink to={"/create-note"}>
+							<div className="flex items-center gap-3 ml-4 text-xl my-5">
+								<PiNotebookBold />
+								<p>Blank Note</p>
+							</div>
+						</NavLink>
+						<NavLink to={"/todolist"}>
+							<div className="flex items-center gap-3 ml-4 text-xl my-5">
+								<LuListTodo />
+								<p>To-do List</p>
+							</div>
+						</NavLink>
 					</div>
 				) : (
 					<div></div>

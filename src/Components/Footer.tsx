@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 const Footer = () => {
 	return (
 		<div>
@@ -8,7 +10,9 @@ const Footer = () => {
 				</div>
 				<div className="flex gap-4 text-[#768492]">
 					<p>2023 &copy;</p>
-					<p className="text-black">NoteHub.</p>
+					<NavLink to={"/"}>
+						<p className="text-black cursor-pointer">NoteHub.</p>
+					</NavLink>
 				</div>
 			</div>
 		</div>
