@@ -1,5 +1,7 @@
 import Footer from "./Components/Footer";
+import NoteGround from "./Components/NoteGround";
 import Sidebar from "./Components/Sidebar";
+import TodoGround from "./Components/TodoGround";
 import Error from "./Pages/Error";
 import Home from "./Pages/Home";
 import Pricing from "./Pages/Pricing";
@@ -10,7 +12,7 @@ const App = () => {
 	return (
 		<div className="flex relative">
 			<Sidebar />
-			<Pricing />
+			<TodoGround />
 			<Footer />
 		</div>
 	);

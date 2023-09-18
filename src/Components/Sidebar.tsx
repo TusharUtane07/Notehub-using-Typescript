@@ -3,7 +3,7 @@ import { useState } from "react";
 import logo from "../Assests/logo.png";
 import avatar from "../Assests/Avatar.jpg";
 import { BiSearch } from "react-icons/bi";
-import { AiOutlinePlus, AiFillFolderOpen, AiOutlineDown } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineDown } from "react-icons/ai";
 import { PiNotebookBold } from "react-icons/pi";
 import { LuListTodo } from "react-icons/lu";
 import upgrade from "../Assests/side-bkg.png";
@@ -38,7 +38,7 @@ const Sidebar = () => {
 					/>
 				</div>
 				<div
-					className="flex cursor-pointer items-center mt-4 buttonStyle pl-5 gap-3"
+					className="flex cursor-pointer items-center  mt-4 buttonStyle pl-5 gap-3"
 					onClick={() => setPopUp(!popUp)}>
 					<AiOutlinePlus />
 					<p className="mr-16">Add New</p>
@@ -46,12 +46,12 @@ const Sidebar = () => {
 				</div>
 
 				{popUp ? (
-					<div className="bg-[#f3f6fd] shadow-xl mt-3 rounded-xl h-16 w-56 px-3 py-2 text-center">
-						<div className="flex items-center gap-3 ml-4">
+					<div className="bg-[#f3f6fd] shadow-xl mt-3 rounded-xl h-32 w-56 px-3 py-2 text-center cursor-pointer">
+						<div className="flex items-center gap-3 ml-4 text-xl my-5">
 							<PiNotebookBold />
 							<p>Blank Note</p>
 						</div>
-						<div className="flex items-center gap-3 ml-4">
+						<div className="flex items-center gap-3 ml-4 text-xl my-5">
 							<LuListTodo />
 							<p>To-do List</p>
 						</div>

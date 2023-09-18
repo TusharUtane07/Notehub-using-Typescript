@@ -12,7 +12,28 @@ body{
     color: white;
     height: 40px;
     border-radius: 8px;
+    user-select: none;
 }
 ::-webkit-scrollbar{
+    display: none;
+}
+textarea {
+    resize: none;
+  }
+
+  input[type=date]::-webkit-datetime-edit-text {
+    -webkit-appearance: none;
+    display: none;
+}
+input[type=date]::-webkit-datetime-edit-month-field{
+    -webkit-appearance: none;
+    display: none;
+}
+input[type=date]::-webkit-datetime-edit-day-field {
+    -webkit-appearance: none;
+    display: none;
+}
+input[type=date]::-webkit-datetime-edit-year-field {
+    -webkit-appearance: none;
     display: none;
 }
