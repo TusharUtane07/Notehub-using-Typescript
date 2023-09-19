@@ -1,20 +1,55 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-
-import logo from "../Assests/logo.png";
-import avatar from "../Assests/Avatar.jpg";
-// import { BiSearch } from "react-icons/bi";
 import { AiOutlinePlus, AiOutlineDown } from "react-icons/ai";
 import { PiNotebookBold } from "react-icons/pi";
 import { LuListTodo } from "react-icons/lu";
 import upgrade from "../Assests/side-bkg.png";
+import { User, onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../firebase"; // Import the User type
 
-const Sidebar = () => {
+import logo from "../Assests/logo.png";
+import avatar from "../Assests/Avatar.jpg";
+
+const Sidebar: React.FC = () => {
 	const [popUp, setPopUp] = useState<boolean>(false);
+	const [user, setUser] = useState<User | null>(null);
+	const [uName, setUName] = useState<string>("");
+
+	useEffect(() => {
+		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+			if (currentUser) {
+				setUser(currentUser);
+				const userEmail = currentUser.email;
+				if (userEmail) {
+					if (currentUser.displayName == null) {
+						const u1 = currentUser.email.slice(0, -10);
+						const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
+						// console.log(uName)
+						setUName(uName);
+					}
+				}
+			} else {
+				setUser(null);
+			}
+		});
+		return () => {
+			unsubscribe();
+		};
+	}, []);
+
+	const logoutUser = () => {
+		signOut(auth)
+			.then(() => {
+				console.log("logout successful");
+			})
+			.catch((error) => {
+				console.log(error.message);
+			});
+	};
 
 	return (
 		<div>
-			<div className=" my-[30px] mx-[30px] shadow-xl rounded-xl bg-[#ffffff] w-[270px] pl-5 pr-5">
+			<div className="my-[30px] mx-[30px] shadow-xl rounded-xl bg-[#ffffff] w-[270px] pl-5 pr-5">
 				<NavLink to={"/"}>
 					<div className="flex items-center gap-6 font-bold py-5">
 						<img src={logo} alt="" className="w-[60px] h-[60px]" />
@@ -23,32 +58,34 @@ const Sidebar = () => {
 				</NavLink>
 				<div className="w-full h-[1px] bg-[#768492]"></div>
 				<div className="flex gap-3 items-center">
-					<img
-						src={avatar}
-						alt=""
-						className="h-[50px] w-[50px] rounded-xl mt-3"
-					/>
-					<p className="font-Jost text-[16px] font-bold mt-2">
-						Tushar Rambhau Utane
-					</p>
+					{user ? (
+						<>
+							<img
+								src={avatar}
+								alt=""
+								className="h-[50px] w-[50px] rounded-xl mt-3"
+							/>
+							<p className="font-Jost text-[16px] font-bold mt-2">{uName}</p>
+						</>
+					) : (
+						<>
+							<NavLink to={"/signin"}>
+								<button className="mt-3 bg-[#0f0e17] text-white py-2 rounded-lg w-[227px] text-center">
+									Sign In
+								</button>
+							</NavLink>
+						</>
+					)}
 				</div>
-				{/* <div className="mt-3 bg-[#f3f6fd] flex gap-3 items-center h-[40px] pl-3 rounded-lg">
-					<BiSearch />
-					<input
-						type="text"
-						placeholder="search"
-						className="bg-transparent outline-none  w-[150px]  text-lg pl-2"
-					/>
-				//! </div> WORK ON THESE AFTER COMPLETING THE PROJECT */}
 				<div
-					className="flex cursor-pointer items-center  mt-4 buttonStyle pl-5 gap-3"
+					className="flex cursor-pointer items-center mt-4 buttonStyle pl-5 gap-3"
 					onClick={() => setPopUp(!popUp)}>
 					<AiOutlinePlus />
 					<p className="mr-16">Add New</p>
 					<AiOutlineDown />
 				</div>
 
-				{popUp ? (
+				{popUp && (
 					<div className="bg-[#f3f6fd] shadow-xl mt-3 rounded-xl h-32 w-56 px-3 py-2 text-center cursor-pointer">
 						<NavLink to={"/create-note"}>
 							<div className="flex items-center gap-3 ml-4 text-xl my-5">
@@ -63,8 +100,6 @@ const Sidebar = () => {
 							</div>
 						</NavLink>
 					</div>
-				) : (
-					<div></div>
 				)}
 
 				<div className="mt-4 cursor-pointer flex items-center gap-4 bg-[#f3f6fd] py-3 rounded-lg px-4">
@@ -85,7 +120,11 @@ const Sidebar = () => {
 					<NavLink to={"/pricing"}>
 						<button className="mt-3 mb-5 buttonStyle px-5">Upgrade</button>
 					</NavLink>
-					<button className="mt-3 mb-5 ml-3 buttonStyle px-5">Logout</button>
+					<button
+						className="mt-3 mb-5 ml-3 buttonStyle px-5"
+						onClick={logoutUser}>
+						Logout
+					</button>
 				</div>
 			</div>
 		</div>

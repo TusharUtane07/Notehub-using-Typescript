@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
 import logo from "../Assests/logo.png";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 
 const SignUp = () => {
 	const [isChecked, setIsChecked] = useState(false);
@@ -8,8 +10,32 @@ const SignUp = () => {
 	const [password, setPassword] = useState<string>("");
 	const [cPassword, setCPassword] = useState<string>("");
 
+	// const auth = getAuth();
+
 	const handleCheckboxChange = () => {
 		setIsChecked(!isChecked);
+	};
+
+	const signUpUser = (event: MouseEvent<HTMLButtonElement>) => {
+		event.preventDefault();
+		if (password !== cPassword) {
+			//   toast.error("Passwords are not matching");
+		}
+		// setLoading(true);
+		createUserWithEmailAndPassword(auth, email, password)
+			.then((userCredential) => {
+				const user = userCredential.user;
+
+				console.log(user);
+				// setLoading(false);
+				// toast.success("Registered Successfully");
+				// navigate("/login");
+			})
+			.catch((error) => {
+				console.log(error.message);
+				// toast.error(error.message);
+				// setLoading(false);
+			});
 	};
 
 	return (
@@ -65,7 +91,9 @@ const SignUp = () => {
 							<span>I agree with the terms of use</span>
 						</div>
 						<div className="flex justify-center mt-5">
-							<button className="bg-black text-white rounded-xl  h-[38px] w-[80px]">
+							<button
+								className="bg-black text-white rounded-xl  h-[38px] w-[80px]"
+								onClick={(e) => signUpUser(e)}>
 								Sign Up
 							</button>
 						</div>

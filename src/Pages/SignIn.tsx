@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
 import logo from "../Assests/logo.png";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
 	const [isChecked, setIsChecked] = useState(false);
@@ -8,6 +11,20 @@ const SignIn = () => {
 
 	const handleCheckboxChange = () => {
 		setIsChecked(!isChecked);
+	};
+
+	const navigate = useNavigate();
+
+	const signInUser = (e: MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		signInWithEmailAndPassword(auth, email, password)
+			.then(() => {
+				console.log("user login successful!!");
+				navigate("/");
+			})
+			.catch((error) => {
+				console.log(error.message);
+			});
 	};
 
 	return (
@@ -49,7 +66,9 @@ const SignIn = () => {
 							<span>Remember Me</span>
 						</div>
 						<div className="flex justify-center mt-5">
-							<button className="bg-black text-white rounded-xl  h-[38px] w-[80px]">
+							<button
+								className="bg-black text-white rounded-xl  h-[38px] w-[80px]"
+								onClick={(e) => signInUser(e)}>
 								Sign In
 							</button>
 						</div>
