@@ -2,7 +2,7 @@ import { useState, MouseEvent } from "react";
 import logo from "../Assests/logo.png";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
 	const [isChecked, setIsChecked] = useState(false);
@@ -73,7 +73,9 @@ const SignIn = () => {
 							</button>
 						</div>
 						<p className="mt-5">
-							Create an account <span className="text-black">Sign Up</span>
+							<NavLink to={"/signup"}>
+								Create an account <span className="text-black">Sign Up</span>
+							</NavLink>
 						</p>
 					</form>
 				</div>

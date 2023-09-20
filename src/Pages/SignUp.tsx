@@ -2,6 +2,7 @@ import { useState, MouseEvent } from "react";
 import logo from "../Assests/logo.png";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
 	const [isChecked, setIsChecked] = useState(false);
@@ -16,6 +17,7 @@ const SignUp = () => {
 		setIsChecked(!isChecked);
 	};
 
+	const navigate = useNavigate();
 	const signUpUser = (event: MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
 		if (password !== cPassword) {
@@ -23,18 +25,11 @@ const SignUp = () => {
 		}
 		// setLoading(true);
 		createUserWithEmailAndPassword(auth, email, password)
-			.then((userCredential) => {
-				const user = userCredential.user;
-
-				console.log(user);
-				// setLoading(false);
-				// toast.success("Registered Successfully");
-				// navigate("/login");
+			.then(() => {
+				navigate("/signin");
 			})
 			.catch((error) => {
 				console.log(error.message);
-				// toast.error(error.message);
-				// setLoading(false);
 			});
 	};
 
@@ -99,7 +94,9 @@ const SignUp = () => {
 						</div>
 						<p className="mt-5">
 							Already have an account{" "}
-							<span className="text-black">Sign In</span>
+							<NavLink to={"/signin"}>
+								<span className="text-black">Sign In</span>
+							</NavLink>
 						</p>
 					</form>
 				</div>

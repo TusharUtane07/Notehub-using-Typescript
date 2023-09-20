@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { AiOutlinePlus, AiOutlineDown } from "react-icons/ai";
+import { PiSignInBold } from "react-icons/pi";
 import { PiNotebookBold } from "react-icons/pi";
 import { LuListTodo } from "react-icons/lu";
 import upgrade from "../Assests/side-bkg.png";
@@ -70,8 +71,9 @@ const Sidebar: React.FC = () => {
 					) : (
 						<>
 							<NavLink to={"/signin"}>
-								<button className="mt-3 bg-[#0f0e17] text-white py-2 rounded-lg w-[227px] text-center">
+								<button className="mt-3 flex items-center justify-center gap-3 text-lg bg-[#0f0e17] text-white py-2 rounded-lg w-[230px] text-center">
 									Sign In
+									<PiSignInBold />
 								</button>
 							</NavLink>
 						</>
