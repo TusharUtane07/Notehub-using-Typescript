@@ -3,6 +3,7 @@ import logo from "../Assests/logo.png";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { NavLink, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const SignIn = () => {
 	const [isChecked, setIsChecked] = useState(false);
@@ -21,6 +22,7 @@ const SignIn = () => {
 			.then(() => {
 				console.log("user login successful!!");
 				navigate("/");
+				toast.success("Login successfull!!");
 			})
 			.catch((error) => {
 				console.log(error.message);

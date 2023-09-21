@@ -10,6 +10,7 @@ import { auth } from "../firebase"; // Import the User type
 
 import logo from "../Assests/logo.png";
 import avatar from "../Assests/Avatar.jpg";
+import toast from "react-hot-toast";
 
 const Sidebar: React.FC = () => {
 	const [popUp, setPopUp] = useState<boolean>(false);
@@ -41,7 +42,7 @@ const Sidebar: React.FC = () => {
 	const logoutUser = () => {
 		signOut(auth)
 			.then(() => {
-				console.log("logout successful");
+				toast.success("Logout Successfull!!");
 			})
 			.catch((error) => {
 				console.log(error.message);
@@ -53,7 +54,7 @@ const Sidebar: React.FC = () => {
 			<div className="my-[30px] mx-[30px] shadow-xl rounded-xl bg-[#ffffff] w-[270px] pl-5 pr-5">
 				<NavLink to={"/"}>
 					<div className="flex items-center gap-6 font-bold py-5">
-						<img src={logo} alt="" className="w-[60px] h-[60px]" />
+						<img src={logo} alt="" className="w-[55px] h-[55px]" />
 						<p className="font-Jost text-[23px]">NoteHub</p>
 					</div>
 				</NavLink>
@@ -71,7 +72,7 @@ const Sidebar: React.FC = () => {
 					) : (
 						<>
 							<NavLink to={"/signin"}>
-								<button className="mt-3 flex items-center justify-center gap-3 text-lg bg-[#0f0e17] text-white py-2 rounded-lg w-[230px] text-center">
+								<button className="mt-3 flex items-center justify-center gap-3 text-base bg-[#0f0e17] text-white py-2 rounded-lg w-[230px] text-center">
 									Sign In
 									<PiSignInBold />
 								</button>
@@ -80,7 +81,7 @@ const Sidebar: React.FC = () => {
 					)}
 				</div>
 				<div
-					className="flex cursor-pointer items-center mt-4 buttonStyle pl-5 gap-3"
+					className="flex cursor-pointer items-center mt-2 buttonStyle pl-5 gap-3"
 					onClick={() => setPopUp(!popUp)}>
 					<AiOutlinePlus />
 					<p className="mr-16">Add New</p>
@@ -115,7 +116,7 @@ const Sidebar: React.FC = () => {
 					</div>
 				</NavLink>
 				<div className="mt-5 text-center">
-					<img src={upgrade} alt="" />
+					<img src={upgrade} alt="" className="w-52" />
 					<p className="capitalize">
 						Set Business Account To Explore premium features
 					</p>

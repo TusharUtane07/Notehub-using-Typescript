@@ -4,6 +4,7 @@ import { FaBackward } from "react-icons/fa";
 import Sidebar from "./Sidebar";
 import { NavLink } from "react-router-dom";
 import { MouseEvent, useState } from "react";
+import toast from "react-hot-toast";
 
 const NoteGround = () => {
 	const [title, setTitle] = useState<string>("");
@@ -13,6 +14,13 @@ const NoteGround = () => {
 		e.preventDefault();
 		setTitle("");
 		setDescription("");
+		toast.success("Successfully Reset!");
+	};
+
+	const saveIt = (e: MouseEvent<HTMLDivElement>) => {
+		e.preventDefault();
+
+		toast.success("Saved successfully!!");
 	};
 
 	return (
@@ -58,7 +66,9 @@ const NoteGround = () => {
 									<GrPowerReset />
 									<button>Reset</button>
 								</div>
-								<div className="flex items-center cursor-pointer gap-2 bg-[#0f0e17] text-white px-3 py-1 rounded-lg">
+								<div
+									className="flex items-center cursor-pointer gap-2 bg-[#0f0e17] text-white px-3 py-1 rounded-lg"
+									onClick={(e) => saveIt(e)}>
 									<MdSaveAlt />
 									<button>Save</button>
 								</div>

@@ -6,6 +6,7 @@ import Home from "./Pages/Home";
 import Pricing from "./Pages/Pricing";
 import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
 	return (
@@ -21,6 +22,7 @@ const App = () => {
 					<Route path="*" element={<Error />} />
 				</Routes>
 			</BrowserRouter>
+			<Toaster position="top-center" reverseOrder={false} />
 		</div>
 	);
 };
