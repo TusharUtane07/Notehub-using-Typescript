@@ -3,12 +3,17 @@ import { MdSaveAlt } from "react-icons/md";
 import { FaBackward } from "react-icons/fa";
 import Sidebar from "./Sidebar";
 import { NavLink } from "react-router-dom";
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from "../firebase";
+import { User, onAuthStateChanged } from "firebase/auth";
 
 const NoteGround = () => {
 	const [title, setTitle] = useState<string>("");
 	const [description, setDescription] = useState<string>("");
+	const [user, setUser] = useState<User | null>(null);
+	const [uName, setUName] = useState<string>("");
 
 	const handleReset = (e: MouseEvent<HTMLDivElement>) => {
 		e.preventDefault();
@@ -17,10 +22,39 @@ const NoteGround = () => {
 		toast.success("Successfully Reset!");
 	};
 
-	const saveIt = (e: MouseEvent<HTMLDivElement>) => {
-		e.preventDefault();
+	useEffect(() => {
+		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+			if (currentUser) {
+				setUser(currentUser);
+				const userEmail = currentUser.email;
+				if (userEmail) {
+					if (currentUser.displayName == null) {
+						const u1 = currentUser.email.slice(0, -10);
+						const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
+						// console.log(uName)
+						setUName(uName);
+					}
+				}
+			} else {
+				setUser(null);
+			}
+		});
+		return () => {
+			unsubscribe();
+		};
+	}, []);
 
-		toast.success("Saved successfully!!");
+	const saveIt = async (e: MouseEvent<HTMLDivElement>) => {
+		e.preventDefault();
+		if (user) {
+			await setDoc(doc(db, uName, title), {
+				title: title,
+				description: description,
+			});
+			toast.success("Saved successfully!!");
+		} else {
+			toast.error("Login First!!");
+		}
 	};
 
 	return (
