@@ -5,7 +5,7 @@ import Sidebar from "./Sidebar";
 import { NavLink } from "react-router-dom";
 import { MouseEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { doc, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { User, onAuthStateChanged } from "firebase/auth";
 
@@ -46,8 +46,10 @@ const NoteGround = () => {
 
 	const saveIt = async (e: MouseEvent<HTMLDivElement>) => {
 		e.preventDefault();
+		const ref = collection(db, uName);
+
 		if (user) {
-			await setDoc(doc(db, uName, title), {
+			await addDoc(ref, {
 				title: title,
 				description: description,
 			});

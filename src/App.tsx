@@ -7,6 +7,7 @@ import Pricing from "./Pages/Pricing";
 import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
 import { Toaster } from "react-hot-toast";
+import YourNotes from "./Pages/YourNotes";
 
 const App = () => {
 	return (
@@ -19,6 +20,7 @@ const App = () => {
 					<Route path="/signup" element={<SignUp />} />
 					<Route path="/todolist" element={<TodoGround />} />
 					<Route path="/create-note" element={<NoteGround />} />
+					<Route path="/your-notes" element={<YourNotes />} />
 					<Route path="*" element={<Error />} />
 				</Routes>
 			</BrowserRouter>
