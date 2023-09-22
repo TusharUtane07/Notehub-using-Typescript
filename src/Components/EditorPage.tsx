@@ -5,17 +5,20 @@ import { MdSaveAlt } from "react-icons/md";
 import { GrPowerReset } from "react-icons/gr";
 import { MouseEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { DocumentData, collection, getDocs, query } from "firebase/firestore";
+import {
+	DocumentData,
+	collection,
+	doc,
+	getDocs,
+	query,
+	updateDoc,
+} from "firebase/firestore";
 import { User, onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../firebase";
 
 const EditorPage = () => {
 	const [title, setTitle] = useState<string>("");
 	const [desc, setDesc] = useState<string>("");
-
-	const [data, setData] = useState<Array<{ id: string; data: DocumentData }>>(
-		[]
-	);
 	const [user, setUser] = useState<User | null>(null);
 	const [uName, setUName] = useState<string>("");
 
@@ -52,7 +55,6 @@ const EditorPage = () => {
 					id: doc.id,
 					data: doc.data(),
 				}));
-			setData(documents);
 			console.log(documents);
 			documents.map((item: any) => {
 				if (item.id === id && item.data) {
@@ -71,8 +73,21 @@ const EditorPage = () => {
 		}
 	}, [uName, user]);
 
-	const saveIt = (e: MouseEvent<HTMLDivElement>) => {
+	const saveIt = async (e: MouseEvent<HTMLDivElement>) => {
 		e.preventDefault();
+		const docRef = collection(db, uName);
+		const docToUpdate = doc(docRef, id);
+		await updateDoc(docToUpdate, {
+			title,
+			desc,
+		})
+			.then(() => {
+				console.log("Doc update successfully");
+				toast.success("Note updated!!");
+			})
+			.catch((error) => {
+				toast.error(error.message);
+			});
 	};
 
 	const handleReset = (e: MouseEvent<HTMLDivElement>) => {
@@ -83,7 +98,7 @@ const EditorPage = () => {
 	};
 
 	return (
-		<div>
+		<div className="flex">
 			<>
 				<Sidebar />
 				<div>

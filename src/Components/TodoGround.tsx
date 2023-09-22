@@ -4,6 +4,7 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import Sidebar from "./Sidebar";
 import { NavLink } from "react-router-dom";
 import { FaBackward } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const TodoGround = () => {
 	const [todo, setTodo] = useState<string>("");
@@ -51,20 +52,23 @@ const TodoGround = () => {
 
 	const clearAll = () => {
 		setTodoList([]);
-		localStorage.removeItem("todos"); // Remove all todos from local storage
+		localStorage.removeItem("todos");
+		toast.success("All task Deleted!!");
 	};
 
 	const toggleCompleted = (index: number) => {
 		const updatedTodoList = [...todoList];
 		updatedTodoList[index].completed = !updatedTodoList[index].completed;
 		setTodoList(updatedTodoList);
-		saveTodosToLocalStorage(updatedTodoList); // Save the updated list to local storage
+		saveTodosToLocalStorage(updatedTodoList);
+		toast.success("Task Completed!!");
 	};
 
 	const deleteSpecific = (index: number) => {
 		const updatedList = todoList.filter((_, i) => i !== index);
 		setTodoList(updatedList);
-		saveTodosToLocalStorage(updatedList); // Save the updated list to local storage
+		saveTodosToLocalStorage(updatedList);
+		toast.success("Deleted Successfully!!");
 	};
 
 	return (
@@ -110,7 +114,7 @@ const TodoGround = () => {
 											<div className="flex items-center">
 												<input
 													type="checkbox"
-													className="mr-3 w-8 h-7 accent-black"
+													className="mr-3 w-8 h-7 accent-black cursor-pointer"
 													onClick={() => toggleCompleted(index)}
 													checked={item.completed}
 												/>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AiOutlinePlus, AiOutlineDown } from "react-icons/ai";
 import { PiSignInBold } from "react-icons/pi";
 import { PiNotebookBold } from "react-icons/pi";
@@ -16,6 +16,8 @@ const Sidebar: React.FC = () => {
 	const [popUp, setPopUp] = useState<boolean>(false);
 	const [user, setUser] = useState<User | null>(null);
 	const [uName, setUName] = useState<string>("");
+
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -43,6 +45,7 @@ const Sidebar: React.FC = () => {
 		signOut(auth)
 			.then(() => {
 				toast.success("Logout Successfull!!");
+				navigate("/");
 			})
 			.catch((error) => {
 				console.log(error.message);

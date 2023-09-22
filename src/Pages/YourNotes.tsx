@@ -9,7 +9,11 @@ import {
 import { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import { User, onAuthStateChanged } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import Sidebar from "../Components/Sidebar";
+import { FaBackward } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import toast from "react-hot-toast";
 
 const YourNotes = () => {
 	const [data, setData] = useState<Array<{ id: string; data: DocumentData }>>(
@@ -69,35 +73,66 @@ const YourNotes = () => {
 	};
 	const handleDelete = async (item: any) => {
 		await deleteDoc(doc(db, uName, item));
+		toast.success("Deleted Successfully!!");
 		// Fetch data again to update the list after deletion
 		fetchData();
 	};
 
 	return (
-		<div>
-			{loading ? (
-				<p>Loading...</p>
-			) : data.length === 0 ? (
-				<p>No data present</p>
-			) : (
-				data.map((item) => {
-					return (
-						<>
-							<div
-								key={item.id}
-								className="border-2 border-black"
-								onClick={() => changeRoute(item.id)}>
-								<div>{item.data.title}</div>
-								<div className="">{item.data.description}</div>
-							</div>
-							<div className="border-t-2 border-black">
-								<button onClick={() => handleDelete(item.id)}>Delete</button>
-							</div>
-						</>
-					);
-				})
-			)}
-		</div>
+		<>
+			<Sidebar />
+			<div className="flex flex-col h-[688px]">
+				<div className="h-[78px] bg-white w-[1150px]  shadow-md mt-[30px] rounded-xl text-3xl px-10 py-5 font-Jost font-bold flex justify-between">
+					<p>Your Notes</p>
+					<NavLink to={"/"}>
+						<div className="flex items-center text-lg buttonStyle px-5 gap-3">
+							<FaBackward />
+							<button>Back</button>
+						</div>
+					</NavLink>
+				</div>
+
+				<div className="bg-white rounded-xl mt-6 shadow-md w-[1150px] h-full  px-5 overflow-scroll">
+					<div className="bg-white rounded-xl  text-xl capitalize py-5 cursor-pointer ">
+						<div className="">
+							{loading ? (
+								<p className="text-6xl flex items-center justify-center h-[500px]">
+									Loading...
+								</p>
+							) : data.length === 0 ? (
+								<p className="text-center text-4xl font-Jost font-bold">
+									No data present
+								</p>
+							) : (
+								data.map((item) => {
+									return (
+										<>
+											<div className="flex justify-between mx-10 border-2 p-5 rounded-lg border-black my-5">
+												<div
+													key={item.id}
+													className="f "
+													onClick={() => changeRoute(item.id)}>
+													<div className="text-3xl font-bold font-Jost">
+														{item.data.title}
+													</div>
+												</div>
+												<div className="">
+													<button
+														onClick={() => handleDelete(item.id)}
+														className="text-2xl buttonStyle px-8">
+														<MdDelete />
+													</button>
+												</div>
+											</div>
+										</>
+									);
+								})
+							)}
+						</div>
+					</div>
+				</div>
+			</div>
+		</>
 	);
 };
 
