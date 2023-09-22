@@ -8,6 +8,7 @@ import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
 import { Toaster } from "react-hot-toast";
 import YourNotes from "./Pages/YourNotes";
+import EditorPage from "./Components/EditorPage";
 
 const App = () => {
 	return (
@@ -21,6 +22,7 @@ const App = () => {
 					<Route path="/todolist" element={<TodoGround />} />
 					<Route path="/create-note" element={<NoteGround />} />
 					<Route path="/your-notes" element={<YourNotes />} />
+					<Route path="/editor/:id" element={<EditorPage />} />
 					<Route path="*" element={<Error />} />
 				</Routes>
 			</BrowserRouter>

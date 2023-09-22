@@ -105,10 +105,12 @@ const Sidebar: React.FC = () => {
 					</div>
 				)}
 
-				<div className="mt-4 cursor-pointer flex items-center gap-4 bg-[#f3f6fd] py-3 rounded-lg px-4">
-					<PiNotebookBold />
-					<p>Your Notes</p>
-				</div>
+				<NavLink to={"/your-notes"}>
+					<div className="mt-4 cursor-pointer flex items-center gap-4 bg-[#f3f6fd] py-3 rounded-lg px-4">
+						<PiNotebookBold />
+						<p>Your Notes</p>
+					</div>
+				</NavLink>
 				<NavLink to={"/todolist"}>
 					<div className="mt-4 cursor-pointer flex items-center gap-4 bg-[#f3f6fd] py-3 rounded-lg px-4">
 						<LuListTodo />

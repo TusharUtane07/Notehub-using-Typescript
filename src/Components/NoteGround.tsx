@@ -5,7 +5,7 @@ import Sidebar from "./Sidebar";
 import { NavLink } from "react-router-dom";
 import { MouseEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { User, onAuthStateChanged } from "firebase/auth";
 
